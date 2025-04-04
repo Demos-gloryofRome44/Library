@@ -54,3 +54,7 @@ docker-compose up
 ```bash
 http://localhost:8080
 ```
+
+## 🖥️ Пример работы:
+
+https://github.com/user-attachments/assets/28bcfb0d-e112-4fdf-a7f8-9f3aa23ad957
