@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Детали пользователя</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/people/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+<div class="navigation">
+    <a th:href="@{/people}"><i class="fas fa-users"></i> Список людей</a>
+    <a th:href="@{/books}"><i class="fas fa-book"></i> Список книг</a>
+</div>
+
+<div class="card">
+    <div class="person-details">
+        <h1><i class="fas fa-user"></i> <span th:text="${person.name}"></span></h1>
+        <p><strong>Возраст:</strong> <span th:text="${person.age}"></span></p>
+        <p><strong>Email:</strong> <span th:text="${person.email}"></span></p>
+    </div>
+
+    <div class="actions">
+        <a th:href="@{/people/{id}/edit(id=${person.id})}" class="btn">
+            <i class="fas fa-edit"></i> Редактировать
+        </a>
+        <form th:action="@{/people/{id}(id=${person.id})}" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit" class="btn-danger">
+                <i class="fas fa-trash"></i> Удалить
+            </button>
+        </form>
+    </div>
+
+    <div class="books-list" th:if="${books != null}">
+        <h2><i class="fas fa-book-open"></i> Назначенные книги</h2>
+        <div th:if="${!books.empty}">
+            <table>
+                <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Автор</th>
+                    <th>Год</th>
+                    <th>Действие</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="book : ${books}">
+                    <td>
+                        <a th:href="@{/books/{id}(id=${book.id})}"
+                           th:text="${book.title}"></a>
+                    </td>
+                    <td th:text="${book.author}"></td>
+                    <td th:text="${book.year}"></td>
+                    <td>
+                        <form th:action="@{/books/{id}/release(id=${book.id})}" method="post">
+                            <input type="hidden" name="_method" value="patch">
+                            <button type="submit" class="btn-warning">
+                                <i class="fas fa-book-open"></i> Освободить
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:if="${books.empty}" class="no-books">
+            <p><i class="fas fa-info-circle"></i> Нет назначенных книг</p>
+        </div>
+    </div>
+
+    <div class="back-link">
+        <a th:href="@{/people}" class="btn">
+            <i class="fas fa-arrow-left"></i> Вернуться к списку
+        </a>
+    </div>
+</div>
+</body>
+</html>

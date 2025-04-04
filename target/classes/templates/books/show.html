@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${book.title} + ' - Детали'">Детали книги</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/books/show.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+<div class="navigation">
+    <a th:href="@{/people}"><i class="fas fa-users"></i> Список людей</a>
+    <a th:href="@{/books}"><i class="fas fa-book"></i> Список книг</a>
+</div>
+
+<div class="book-detail-container">
+    <div th:if="${book != null}">
+        <div class="book-header">
+            <h1><i class="fas fa-book"></i> <span th:text="${book.title}"></span></h1>
+            <p class="book-info"><strong>Автор:</strong> <span th:text="${book.author}"></span></p>
+            <p class="book-info"><strong>Год:</strong> <span th:text="${book.year}"></span></p>
+        </div>
+
+        <div class="assignment-section">
+            <h3><i class="fas fa-user-tag"></i> Статус книги</h3>
+
+            <div th:if="${bookOwner != null}">
+                <div class="reader-info">
+                    <i class="fas fa-user-check"></i>
+                    <span>Находится у: </span>
+                    <a th:href="@{/people/{id}(id=${bookOwner.id})}">
+                        <span th:text="${bookOwner.name}"></span>
+                    </a>
+                </div>
+                <form th:action="@{/books/{id}/release(id=${book.id})}" method="post">
+                    <input type="hidden" name="_method" value="patch">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-book-open"></i> Освободить книгу
+                    </button>
+                </form>
+            </div>
+
+            <div th:unless="${bookOwner != null}">
+                <p>Книга свободна</p>
+                <form th:action="@{/books/{id}/assign(id=${book.id})}" method="post">
+                    <input type="hidden" name="_method" value="patch">
+                    <select name="personId" required>
+                        <option value="">-- Выберите читателя --</option>
+                        <option th:each="person : ${people}"
+                                th:value="${person.id}"
+                                th:text="${person.name}"></option>
+                    </select>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i> Назначить читателя
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="actions" style="margin-top: 30px;">
+            <a th:href="@{/books}" class="back-link">
+                <i class="fas fa-arrow-left"></i> Вернуться к списку книг
+            </a>
+        </div>
+    </div>
+
+    <div th:unless="${book != null}" class="not-found">
+        <h2><i class="fas fa-book-dead"></i> Книга не найдена</h2>
+        <p>Запрошенная книга не существует или была удалена</p>
+        <a th:href="@{/books}" class="btn btn-primary" style="margin-top: 15px;">
+            <i class="fas fa-arrow-left"></i> К списку книг
+        </a>
+    </div>
+</div>
+</body>
+</html>

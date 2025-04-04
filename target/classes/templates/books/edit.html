@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Редактировать книгу</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/books/edit.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+<div class="navigation">
+  <a th:href="@{/people}"><i class="fas fa-users"></i> Список людей</a>
+  <a th:href="@{/books}"><i class="fas fa-book"></i> Список книг</a>
+</div>
+
+<div class="edit-container">
+  <div th:if="${book != null}">
+    <h1><i class="fas fa-edit"></i> Редактирование книги</h1>
+
+    <form th:action="@{/books/{id}(id=${book.id})}" th:object="${book}" method="post">
+      <input type="hidden" name="_method" value="put">
+
+      <div class="form-group">
+        <label for="title"><i class="fas fa-heading"></i> Название:</label>
+        <input type="text" id="title" th:field="*{title}" class="form-control">
+        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="author"><i class="fas fa-user-pen"></i> Автор:</label>
+        <input type="text" id="author" th:field="*{author}" class="form-control">
+        <span th:if="${#fields.hasErrors('author')}" th:errors="*{author}" class="error"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="year"><i class="fas fa-calendar"></i> Год издания:</label>
+        <input type="number" id="year" th:field="*{year}" class="form-control">
+        <span th:if="${#fields.hasErrors('year')}" th:errors="*{year}" class="error"></span>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-save"></i> Сохранить изменения
+        </button>
+        <a th:href="@{/books}" class="btn btn-secondary">
+          <i class="fas fa-times"></i> Отмена
+        </a>
+      </div>
+    </form>
+  </div>
+
+  <div th:unless="${book != null}" class="error-message">
+    <p><i class="fas fa-exclamation-triangle"></i> Книга не найдена</p>
+    <a th:href="@{/books}" class="btn">
+      <i class="fas fa-arrow-left"></i> Вернуться к списку
+    </a>
+  </div>
+</div>
+</body>
+</html>
