@@ -1,0 +1,102 @@
+<style>
+.book-detail-container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.book-header {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.book-header h1 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.book-info {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.book-info strong {
+    color: #495057;
+    min-width: 80px;
+    display: inline-block;
+}
+
+.assignment-section {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+}
+
+select {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.not-found {
+    text-align: center;
+    padding: 40px;
+    color: #6c757d;
+}
+
+.back-link {
+    margin-top: 30px;
+    display: inline-block;
+}
+
+.reader-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.reader-info a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+}
+</style>

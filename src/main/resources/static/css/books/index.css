@@ -1,0 +1,40 @@
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.styled-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #495057;
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.styled-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+
+/* Стили для кнопок действий */
+.actions {
+    display: flex;
+    gap: 10px;
+    min-width: 150px; /* Минимальная ширина для колонки */
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+    .styled-table th:last-child,
+    .styled-table td:last-child {
+        text-align: center;
+    }
+
+    .actions {
+        flex-direction: column;
+        gap: 5px;
+        min-width: auto;
+    }
+}
